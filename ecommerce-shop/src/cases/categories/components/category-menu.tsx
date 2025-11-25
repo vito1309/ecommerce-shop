@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { useCategories } from "../hooks/use-categories";
+import { useCategories, useCategory } from "../hooks/use-categories";
 import type { CategoryDTO } from "../dtos/category.dto";
 import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 
 export function CategoryMenu() {
 
@@ -18,6 +18,11 @@ export function CategoryMenu() {
 
         const[visibleItems, setVisibleItems] = useState<CategoryDTO[]>([])
         const[hiddenItems, setHiddenItems] = useState<CategoryDTO[]>([])
+
+        const[searchParams, setSearchParams] = useSearchParams();
+        const categoryId = searchParams.get('categoryID') ?? undefined;
+
+        const {data: activeCategory} = useCategory(categoryId!);
 
 
         useEffect(() => {
@@ -29,6 +34,19 @@ export function CategoryMenu() {
             setHiddenItems([]);
         }
         }, [categories]);
+
+
+    function handleSelect(categoryID?: string) {
+        const newParams = new URLSearchParams(searchParams)
+
+        if (categoryId) {
+            newParams.set('categoryID', categoryId)
+        } else {
+            newParams.delete('categoryId');
+        }
+
+        setSearchParams(newParams)
+    }
 
     return(
         <nav className="w-full py-4 flex items-center justify-between">
