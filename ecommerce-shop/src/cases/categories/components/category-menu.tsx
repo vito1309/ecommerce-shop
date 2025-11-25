@@ -39,10 +39,10 @@ export function CategoryMenu() {
     function handleSelect(categoryID?: string) {
         const newParams = new URLSearchParams(searchParams)
 
-        if (categoryId) {
-            newParams.set('categoryID', categoryId)
+        if (categoryID) {
+            newParams.set('categoryID', categoryID)
         } else {
-            newParams.delete('categoryId');
+            newParams.delete('categoryID');
         }
 
         setSearchParams(newParams)
@@ -55,13 +55,14 @@ export function CategoryMenu() {
                 <p className="text-sm text-gray-500">Novos produtos todos os dias</p>
             </div>
             <div className="flex items-center justify-endgap-2">
-                <Button variant="ghost">
+                <Button variant="ghost" onClick={() => handleSelect()}>
                     Todos
                 </Button>
                 {visibleItems.map((category) =>(
                     <Button
                         key={category.id}
                         variant="ghost"
+                        onClick={() => handleSelect(category.id)}
                         >
                             {category.name}
                         </Button>
@@ -81,6 +82,7 @@ export function CategoryMenu() {
                         {hiddenItems.map((category) => (
                             <DropdownMenuItem
                                 key={category.id}
+                                onClick={() => handleSelect(category.id)}
                             >
                                 {category.name}
                             </DropdownMenuItem>
