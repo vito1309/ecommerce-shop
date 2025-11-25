@@ -7,6 +7,9 @@ type ProductCardProps = {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+
+    const bucketBaseURL = import.meta.env.VITE_BUCKET_URL
+
     return (
         <Card>
             <CardHeader></CardHeader>
