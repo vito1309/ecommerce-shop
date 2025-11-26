@@ -5,6 +5,11 @@ export interface BrandDTO {
   name: string;
 }
 
+export interface ProductPhotoDTO{
+  id?: string;
+  path: string;
+}
+
 export interface ProductDTO {
   id?: string;
   name: string;
@@ -13,4 +18,5 @@ export interface ProductDTO {
   active: boolean;
   category: CategoryDTO;
   brand?: BrandDTO;
+  photos?: ProductPhotoDTO[];
 }
