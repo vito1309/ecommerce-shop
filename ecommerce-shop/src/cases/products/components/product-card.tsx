@@ -16,11 +16,6 @@ export function ProductCard({ product }: ProductCardProps) {
             ? `${bucketBaseURL}${product.photos[0].path}`
             : placeholderSVG;
 
-
-    function handleAddProductCart(){
-        
-    }
-
     return (
         <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white">
             <div className="h-[200px] w-full bg-gray-50 flex items-center justify-center overflow-hidden">

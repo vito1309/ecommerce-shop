@@ -1,4 +1,4 @@
-import { ProductDetail } from "@/cases/categories/components/product-detail";
+import { ProductDetail } from "@/cases/products/components/product-detail";
 import { useProduct } from "@/cases/products/hooks/use-products";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { useParams } from "react-router-dom";

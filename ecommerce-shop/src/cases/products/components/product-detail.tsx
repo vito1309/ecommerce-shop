@@ -1,3 +1,4 @@
+import { UseCart } from "@/cases/cart/hooks/use-cart";
 import type { ProductDTO } from "@/cases/products/dtos/product.dto"
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -10,6 +11,9 @@ export function ProductDetail({
     product
 }: ProductDetailProps) {
 
+
+    const {addProduct} = UseCart()
+
     const bucketBaseURL = import.meta.env.VITE_BUCKET_URL || '';
     const [selectedPhoto, setSelectedPhoto] = useState<number>(0);
 
@@ -20,6 +24,12 @@ export function ProductDetail({
     const mainImagePhoto = mainPhoto && bucketBaseURL
         ? `${bucketBaseURL}${mainPhoto.path}`
         : placeholderSVG;
+
+
+
+        function handleAddProductCart(){
+        addProduct(product)
+    }
 
     return (
         <div className="flex gap-16 py-8">
@@ -76,11 +86,13 @@ export function ProductDetail({
                     <div className="border-t pt-6">
                         <p className="text-sm text-gray-500 mb-2">Preço</p>
                         <p className="text-4xl font-bold text-green-600 mb-1">R$ {Number(product.price).toFixed(2)}</p>
-                        <p className="text-sm text-gray-600">ou R$ {(Number(product.price) / 10).toFixed(2)} no PIX</p>
+                        <p className="text-sm text-gray-600">ou R$ {(Number(product.price) * 0.9).toFixed(2)} no PIX</p>
                     </div>
 
                     <div className="border-t pt-6">
-                        <Button className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition-colors">
+                        <Button 
+                            onClick={handleAddProductCart}
+                            className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition-colors">
                             Adicionar ao Carrinho
                         </Button>
                     </div>
