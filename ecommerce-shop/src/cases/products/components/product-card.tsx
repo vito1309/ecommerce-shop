@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
                     <p className="text-gray-500 line-through text-xs">
                         <IntlProvider locale="pt-BR">
-                            <FormattedNumber
+                            <FormattedNumber 
                                 value={product.price * 1.15}
                                 style="currency"
                                 currency="BRL"
