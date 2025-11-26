@@ -20,7 +20,7 @@ export function CategoryMenu() {
         const[hiddenItems, setHiddenItems] = useState<CategoryDTO[]>([])
 
         const[searchParams, setSearchParams] = useSearchParams();
-        const categoryId = searchParams.get('categoryID') ?? undefined;
+        const categoryId = searchParams.get('categoryId') ?? undefined;
 
         const {data: activeCategory} = useCategory(categoryId!);
 
@@ -36,13 +36,13 @@ export function CategoryMenu() {
         }, [categories]);
 
 
-    function handleSelect(categoryID?: string) {
+    function handleSelect(categoryId?: string) {
         const newParams = new URLSearchParams(searchParams)
 
-        if (categoryID) {
-            newParams.set('categoryID', categoryID)
+        if (categoryId) {
+            newParams.set('categoryId', categoryId)
         } else {
-            newParams.delete('categoryID');
+            newParams.delete('categoryId');
         }
 
         setSearchParams(newParams)

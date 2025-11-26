@@ -12,8 +12,8 @@ export function ProductListPage() {
   return (
     <>
       <CategoryMenu />
-      <section className="flex flex-col">
-        <div className="flex mt-8 gap-8">
+      <section className="mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {!isLoading &&
             products.map((product) => (
               <Link 
