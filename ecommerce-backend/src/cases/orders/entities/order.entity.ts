@@ -8,7 +8,7 @@ enum OrderStatus {
   INVOICED = 'INVOICED',
   SHIPPED = 'SHIPPED',
   DELIVERED = 'DELIVERED',
-  CANCELED = 'CANCELADO'
+  CANCELADO = 'CANCELADO'
 }
 
 @Entity('order')

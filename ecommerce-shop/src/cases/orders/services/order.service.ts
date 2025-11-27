@@ -22,4 +22,9 @@ export const OrderService = {
         return result.data;
     },
 
+    async update(id: string, order: Partial<OrderDTO>): Promise<OrderDTO> {
+        const result = await api.put(`${_ENDPOINT}/${id}`, order);
+        return result.data;
+    },
+
 };

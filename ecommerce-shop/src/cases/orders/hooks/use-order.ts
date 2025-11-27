@@ -32,3 +32,16 @@ export function useCreateOrder() {
         },
     });
 }
+
+export function useUpdateOrder() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({ id, order }: { id: string; order: Partial<OrderDTO> }) =>
+            OrderService.update(id, order),
+        onSuccess: (_, { id }) => {
+            queryClient.invalidateQueries({ queryKey: ['orders'] });
+            queryClient.invalidateQueries({ queryKey: ['order', id] });
+        },
+    });
+}

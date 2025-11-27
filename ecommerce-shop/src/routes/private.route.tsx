@@ -8,8 +8,12 @@ type PrivateRouteProps = {
 export function PrivateRoute({
     children
 }: PrivateRouteProps) {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
     const location = useLocation();
+    
+    if (isLoading) {
+        return <div className="flex items-center justify-center min-h-screen">Carregando...</div>
+    }
     
     if (!user) {
         return <Navigate to={`/signin?redirect=${location.pathname}`} replace />

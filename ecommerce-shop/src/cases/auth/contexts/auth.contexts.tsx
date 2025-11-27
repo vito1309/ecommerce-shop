@@ -3,6 +3,7 @@ import type { AuthResponse, UserResponse } from "../dtos/auth.dto";
 
 interface AuthContextType {
     user: UserResponse | null;
+    isLoading: boolean;
     signIn: (data: AuthResponse) => void;
     signOut: () => void;
 }
@@ -17,13 +18,18 @@ type AuthContextProviderProps = {
         children
     }: AuthContextProviderProps) {
 
-        const [user, setUser] = useState<UserResponse | null>(null); 
+        const [user, setUser] = useState<UserResponse | null>(null);
+        const [isLoading, setIsLoading] = useState(true);
         
         useEffect(() => {
             const userStoraged = localStorage.getItem('user');
             //const tokenStoraged = localStorage.getItem('token');
 
-            if (userStoraged) setUser(JSON.parse(userStoraged))
+            if (userStoraged) {
+                setUser(JSON.parse(userStoraged));
+            }
+            
+            setIsLoading(false);
 
         }, [])
 
@@ -42,7 +48,7 @@ type AuthContextProviderProps = {
             localStorage.removeItem('token')
         }
         return(
-            <AuthContext.Provider value={{user, signIn, signOut}}>
+            <AuthContext.Provider value={{user, isLoading, signIn, signOut}}>
                 {children}
             </AuthContext.Provider>
         )

@@ -31,16 +31,14 @@ export class OrderController {
   }
 
   @Put(':id')
-  async update(@Param('id', ParseUUIDPipe) id: string, @Body() order: Order): Promise<Order> {
+  async update(@Param('id', ParseUUIDPipe) id: string, @Body() order: Partial<Order>): Promise<Order> {
     const found = await this.service.findById(id);
 
     if (!found) {
       throw new HttpException('Order not found', HttpStatus.NOT_FOUND);
     }
 
-    order.id = id;
-
-    return this.service.save(order);
+    return this.service.update(id, order);
   }
 
   @Delete(':id')
