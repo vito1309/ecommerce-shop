@@ -2,6 +2,10 @@ import { UseCart } from "@/cases/cart/hooks/use-cart";
 import type { ProductDTO } from "@/cases/products/dtos/product.dto"
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useAuth } from "@/cases/auth/hooks/use-auth";
+import { useOrders } from "@/cases/orders/hooks/use-order";
+import { RatingForm } from "@/cases/ratings/components/rating-form";
+import { RatingDisplay } from "@/cases/ratings/components/rating-display";
 
 type ProductDetailProps = {
     product: ProductDTO
@@ -11,11 +15,17 @@ export function ProductDetail({
     product
 }: ProductDetailProps) {
 
-
     const {addProduct} = UseCart()
+    const { user } = useAuth();
+    const { data: userOrders = [] } = useOrders();
 
     const bucketBaseURL = import.meta.env.VITE_BUCKET_URL || '';
     const [selectedPhoto, setSelectedPhoto] = useState<number>(0);
+
+    // Verificar se o usuário já comprou este produto
+    const hasPurchased = userOrders.some(order =>
+        order.items?.some(item => item.product?.id === product.id)
+    );
 
     const placeholderSVG = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="500"%3E%3Crect fill="%23e5e7eb" width="400" height="500"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="16" fill="%23666"%3ESem Imagem%3C/text%3E%3C/svg%3E';
 
@@ -96,6 +106,21 @@ export function ProductDetail({
                             Adicionar ao Carrinho
                         </Button>
                     </div>
+
+                    <div className="border-t pt-6">
+                        <h2 className="text-lg font-semibold mb-4">Avaliações</h2>
+                        <RatingDisplay productId={product.id!} />
+                    </div>
+
+                    {user && hasPurchased && (
+                        <div className="border-t pt-6">
+                            <h3 className="text-lg font-semibold mb-4">Sua Avaliação</h3>
+                            <RatingForm 
+                                productId={product.id!} 
+                                userId={user.id}
+                            />
+                        </div>
+                    )}
             </div>
         </div>
     )

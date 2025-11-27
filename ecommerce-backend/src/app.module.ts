@@ -9,6 +9,7 @@ import { ProductModule } from './cases/produtcs/product.module';
 import { SupabaseModule } from './lib/supabase/supabase.module';
 import { AuthModule } from './cases/auth/auth.module';
 import { OrderModule } from './cases/orders/order.module';
+import { RatingModule } from './cases/ratings/rating.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { OrderModule } from './cases/orders/order.module';
     CityModule,
     CustomerModule,
     OrderModule,
+    RatingModule,
 
     SupabaseModule,
     AuthModule

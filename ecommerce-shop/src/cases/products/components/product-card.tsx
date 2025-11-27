@@ -1,5 +1,6 @@
 import type { ProductDTO } from "../dtos/product.dto";
 import { FormattedNumber, IntlProvider } from 'react-intl';
+import { FavoriteButton } from "@/cases/favorites/components/favorite-button";
 
 type ProductCardProps = {
     product: ProductDTO;
@@ -18,8 +19,11 @@ export function ProductCard({ product }: ProductCardProps) {
 
     return (
         <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white">
-            <div className="h-[200px] w-full bg-gray-50 flex items-center justify-center overflow-hidden">
+            <div className="h-[200px] w-full bg-gray-50 flex items-center justify-center overflow-hidden relative">
                 <img className="max-h-full max-w-full object-contain" src={imagePath} />
+                <div className="absolute top-2 right-2">
+                    <FavoriteButton product={product} />
+                </div>
             </div>
             <div className="p-3 space-y-2">
                 <h4 className="font-semibold text-sm line-clamp-2 text-gray-900">{product.name}</h4>
