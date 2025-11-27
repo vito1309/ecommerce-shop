@@ -5,6 +5,8 @@ import { Header } from "./components/ui/layout/header"
 import { CartPage } from "./pages/cart-page"
 import { SignInPage } from "./pages/signin-page"
 import { SignUpPage } from "./pages/signup-page"
+import { OrderPage } from "./pages/order-page"
+import { PrivateRoute } from "./routes/private.route"
 
 function App() {
 
@@ -19,6 +21,14 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/signup" element={<SignUpPage />} />
+            <Route 
+              path="/orders" 
+              element={
+                <PrivateRoute>
+                  <OrderPage />
+                </PrivateRoute>
+              } 
+            />
           </Routes>
         </div>
       </main>

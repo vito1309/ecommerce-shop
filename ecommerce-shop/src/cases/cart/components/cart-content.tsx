@@ -1,17 +1,66 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { UseCart } from "../hooks/use-cart";
 import { Item, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "@/components/ui/item";
-import { FormattedNumber, IntlProvider, RawIntlProvider } from "react-intl";
+import { FormattedNumber, IntlProvider } from "react-intl";
 import { Button } from "@/components/ui/button";
 import { MapPin, Trash2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { QuantityInput } from "@/components/ui/quantity-input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { Input } from "@/components/ui/input";
+import { useAuth } from "@/cases/auth/hooks/use-auth";
+import { useCreateOrder } from "@/cases/orders/hooks/use-order";
+import { useNavigate } from "react-router-dom";
+import { useCallback, useState } from "react";
 
 export function Cartcontent(){
-    const {cart, removeProductCart} = UseCart();
+    const { cart, removeProductCart, clearCart } = UseCart();
+    const { user } = useAuth();
+    const { mutate: createOrder } = useCreateOrder();
+    const navigate = useNavigate();
     const bucketBaseURL = import.meta.env.VITE_BUCKET_URL;
+    
+    const [shipping, setShipping] = useState(0);
+
+    const subtotal = cart.items.reduce((sum, item) => sum + (item.product.price * item.quantify), 0);
+    const total = subtotal + shipping;
+
+    const handleFinalizeOrder = useCallback(() => {
+        if (!user) {
+            navigate('/signin?redirect=/cart');
+            return;
+        }
+
+        if (cart.items.length === 0) {
+            alert('Seu carrinho está vazio');
+            return;
+        }
+
+        const orderData = {
+            customer: { id: user.id } as any,
+            userId: user.id,
+            items: cart.items.map(item => ({
+                product: { id: item.product.id } as any,
+                quantity: item.quantify,
+                value: item.product.price,
+            })),
+            shipping,
+            total,
+            status: 'NEW',
+        };
+
+        clearCart();
+        setShipping(0);
+        
+        createOrder(orderData, {
+            onSuccess: () => {
+                alert('Seu pedido foi finalizado com sucesso!\n\nVocê pode verificar seus pedidos em "Meus Pedidos"');
+                navigate('/orders');
+            },
+            onError: (error: any) => {
+                alert(`Erro ao criar pedido: ${error?.response?.data?.message || error?.message}`);
+            },
+        });
+    }, [user, cart, navigate, clearCart, createOrder, shipping, total]);
 
 return (
     <div className="flex gap-4">
@@ -88,33 +137,31 @@ return (
             </CardContent>
         </Card>
         <div className="flex flex-col w-md mt-8 gap-4">
-    <Card>
-        <CardHeader>
-            <CardTitle className="text-sm">Frete para CEP</CardTitle>
-        </CardHeader>
+        <Card>
+         <CardHeader>
+             <CardTitle className="text-sm">Valor do Frete</CardTitle>
+         </CardHeader>
 
-        <CardContent>
-            <InputGroup>
+         <CardContent>
+             <InputGroup>
+                 <InputGroupInput 
+                     type="number"
+                     step="0.01"
+                     min="0"
+                     placeholder="0.00" 
+                     value={shipping}
+                     onChange={(e) => {
+                       const parsed = parseFloat(e.target.value);
+                       setShipping(isNaN(parsed) ? 0 : parsed);
+                     }}
+                 />
 
-                <InputGroupInput placeholder="CEP" />
-
-                <InputGroupAddon>
-                    <MapPin className="text-green-600" />
-                </InputGroupAddon>
-
-                <InputGroupAddon align="inline-end">
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        className="-mr-1 hover:bg-transparent hover:text-green-700"
-                    >
-                        Calcular
-                    </Button>
-                </InputGroupAddon>
-
-            </InputGroup>
-        </CardContent>
-    </Card>
+                 <InputGroupAddon>
+                     <MapPin className="text-green-600" />
+                 </InputGroupAddon>
+             </InputGroup>
+         </CardContent>
+        </Card>
     <Card>
         <CardHeader>
             <CardTitle className="text-sm">
@@ -134,7 +181,7 @@ return (
                             <div className="flex flex-col">
                                 <p className="text-xs font-semibold flex justify-end">
                                     <IntlProvider locale="pt-BR">
-                                        <FormattedNumber value={0} style="currency" currency="BLR"/>
+                                        <FormattedNumber value={shipping} style="currency" currency="BRL"/>
                                     </IntlProvider>
                                 </p>
                             </div>
@@ -154,7 +201,7 @@ return (
                             <div className="flex flex-col">
                                 <p className="text-xs font-semibold flex justify-end">
                                     <IntlProvider locale="pt-BR">
-                                        <FormattedNumber value={500} style="currency" currency="BLR"/>
+                                        <FormattedNumber value={subtotal} style="currency" currency="BRL"/>
                                     </IntlProvider>
                                 </p>
                             </div>
@@ -174,12 +221,12 @@ return (
                             <div className="flex flex-col">
                                 <p className="text-xs font-semibold flex justify-end">
                                     <IntlProvider locale="pt-BR">
-                                        <FormattedNumber value={500*0.9} style="currency" currency="BLR" /> no PIX
+                                        <FormattedNumber value={total * 0.9} style="currency" currency="BRL" /> no PIX
                                     </IntlProvider>
                                 </p>
                                 <p className="text-xs font-light flex justify-end">
                                     <IntlProvider locale="pt-BR">
-                                        <FormattedNumber value={500} style="currency" currency="BLR" /> no Cartão
+                                        <FormattedNumber value={total} style="currency" currency="BRL" /> no Cartão
                                     </IntlProvider>
                                 </p>
                             </div>
@@ -190,6 +237,7 @@ return (
         </CardContent>
         <CardFooter>
             <Button
+            onClick={handleFinalizeOrder}
             className="w-full bg-green-600 hover:bg-green-700 text-white">
                 Finalizar o Pedido
             </Button>

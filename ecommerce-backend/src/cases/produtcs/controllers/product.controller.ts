@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpException, HttpStatus, Par
 import { Product } from "../entities/product.entity";
 import { ProductService } from "../services/product.service";
 import { CategoryService } from "../../categories/category.service";
+import { Category } from "../../categories/category.entity";
 import { validate as isUUID } from 'uuid';
 
 @Controller('products')
@@ -13,13 +14,16 @@ export class ProductController {
   ) {}
 
   @Get()
-  async find(@Query('categoryId') categoryId: string): Promise<Product[]> {
+  async find(
+    @Query('categoryId') categoryId: string,
+    @Query('search') search: string
+  ): Promise<Product[]> {
+    let category: Category | null = null;
     if (categoryId && isUUID(categoryId)) {
-      const category = await this.categoryService.findById(categoryId);
-      return this.service.findAll(category);
+      category = await this.categoryService.findById(categoryId);
     }
 
-    return this.service.findAll();
+    return this.service.findAll(category, search);
   }
 
   @Get(':id')

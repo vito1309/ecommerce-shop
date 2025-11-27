@@ -3,10 +3,23 @@ import { ProductService } from "../services/product.service.ts";
 import type { ProductDTO } from "../dtos/product.dto";
 
 
-export function useProducts(categoryId?: string) {
+export function useProducts(categoryId?: string, search?: string) {
   return useQuery<ProductDTO[]>({
-    queryKey: ['products', categoryId ?? 'all'],
-    queryFn: () => ProductService.list(categoryId),
+    queryKey: ['products', categoryId ?? 'all', search ?? ''],
+    queryFn: async () => {
+      const products = await ProductService.list(categoryId, search);
+      
+      // Filtro local para garantir que a busca funcione
+      if (search && search.trim()) {
+        const searchLower = search.toLowerCase().trim();
+        return products.filter(product =>
+          product.name.toLowerCase().includes(searchLower) ||
+          (product.description && product.description.toLowerCase().includes(searchLower))
+        );
+      }
+      
+      return products;
+    },
   });
 }
 
