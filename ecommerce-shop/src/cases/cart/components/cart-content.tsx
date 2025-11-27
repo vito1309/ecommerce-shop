@@ -35,6 +35,10 @@ export function Cartcontent(){
             return;
         }
 
+        // Calcular total com precisão
+        const orderSubtotal = cart.items.reduce((sum, item) => sum + (item.product.price * item.quantify), 0);
+        const orderTotal = orderSubtotal + shipping;
+
         const orderData = {
             customer: { id: user.id } as any,
             userId: user.id,
@@ -44,15 +48,14 @@ export function Cartcontent(){
                 value: item.product.price,
             })),
             shipping,
-            total,
+            total: orderTotal,
             status: 'NEW',
         };
 
-        clearCart();
-        setShipping(0);
-        
         createOrder(orderData, {
             onSuccess: () => {
+                clearCart();
+                setShipping(0);
                 alert('Seu pedido foi finalizado com sucesso!\n\nVocê pode verificar seus pedidos em "Meus Pedidos"');
                 navigate('/orders');
             },
@@ -60,7 +63,7 @@ export function Cartcontent(){
                 alert(`Erro ao criar pedido: ${error?.response?.data?.message || error?.message}`);
             },
         });
-    }, [user, cart, navigate, clearCart, createOrder, shipping, total]);
+    }, [user, cart, navigate, clearCart, createOrder, shipping]);
 
 return (
     <div className="flex gap-4">

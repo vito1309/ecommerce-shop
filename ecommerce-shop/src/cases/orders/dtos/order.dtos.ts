@@ -15,6 +15,7 @@ export interface OrderDTO {
     userId?: string;
     status: string;
     total: number;
+    shipping?: number;
     items?: OrderItemDTO[];
     createdAt?: Date;
     updatedAt?: Date;
