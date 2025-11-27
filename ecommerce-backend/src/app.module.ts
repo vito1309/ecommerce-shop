@@ -8,6 +8,7 @@ import { CityModule } from './cases/cities/city.module';
 import { ProductModule } from './cases/produtcs/product.module';
 import { SupabaseModule } from './lib/supabase/supabase.module';
 import { AuthModule } from './cases/auth/auth.module';
+import { OrderModule } from './cases/orders/order.module';
 
 @Module({
   imports: [
@@ -29,7 +30,7 @@ import { AuthModule } from './cases/auth/auth.module';
     ProductModule,
     CityModule,
     CustomerModule,
-
+    OrderModule,
 
     SupabaseModule,
     AuthModule
