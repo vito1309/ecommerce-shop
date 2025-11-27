@@ -1,6 +1,6 @@
 import { UseCart } from "@/cases/cart/hooks/use-cart"
 import { useAuth } from "@/cases/auth/hooks/use-auth";
-import { ShoppingCart, User, Heart } from "lucide-react";
+import { ShoppingCart, User, Heart, Zap } from "lucide-react";
 import { Button } from "../button";
 import { Badge } from "../badge";
 import { Link } from "react-router-dom";
@@ -23,9 +23,9 @@ export function Header() {
         <header className="w-full border-b border-gray-200 bg-white shadow-sm" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <div className="container mx-auto flex items-center justify-between py-4 px-4 gap-4">
                 <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                    <ShoppingCart className="text-green-600 w-6 h-6" />
-                    <h1 className="text-xl font-bold text-gray-900">
-                        <span className="font-light">Mater</span><span className="font-bold">Shop</span>
+                    <Zap className="text-blue-600 w-6 h-6" />
+                    <h1 className="text-xl font-bold text-slate-900">
+                        <span className="font-light">Click</span><span className="font-bold">Shop</span>
                     </h1>
                 </Link>
 
@@ -36,7 +36,7 @@ export function Header() {
                         <Link to="/signin">
                             <Button
                                 variant="outline"
-                                className="border-green-600 text-green-600 hover:bg-green-50 font-medium">
+                                className="border-blue-600 text-blue-600 hover:bg-blue-50 font-medium">
                                 Entrar
                             </Button>
                         </Link>
@@ -55,13 +55,13 @@ export function Header() {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="hover:text-green-700 relative transition-colors">
+                            className="hover:text-blue-700 relative transition-colors">
                             <ShoppingCart className="w-5 h-5" />
                             {cart.items.length > 0 && (
                                 <Badge
                                     className={
                                         cn('absolute -top-1 -right-1 h-5 min-w-5 rounded-full px-1',
-                                            'font-mono tabular-nums bg-green-600 text-white font-bold text-xs'
+                                            'font-mono tabular-nums bg-blue-600 text-white font-bold text-xs'
                                         )
                                     }
                                 >
@@ -76,7 +76,7 @@ export function Header() {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="hover:text-green-700 transition-colors">
+                                className="hover:text-blue-700 transition-colors">
                                 <User className="w-5 h-5" />
                             </Button>
                         </DropdownMenuTrigger>

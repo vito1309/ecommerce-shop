@@ -26,7 +26,7 @@ export function FavoritesPage() {
                     <div className="flex flex-col items-center justify-center text-center py-16">
                         <h2 className="text-2xl font-bold text-gray-900 mb-3">Nenhum produto favorito</h2>
                         <p className="text-gray-600 font-medium mb-6">Você ainda não adicionou nenhum produto aos favoritos</p>
-                        <Link to="/" className="text-green-600 hover:text-green-700 font-bold transition-colors">
+                        <Link to="/" className="text-blue-600 hover:text-blue-700 font-bold transition-colors">
                             Continuar comprando
                         </Link>
                     </div>

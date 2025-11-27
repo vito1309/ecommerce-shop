@@ -15,8 +15,8 @@ export function ProductListPage() {
       <CategoryMenu />
 
       {search && (
-        <div className="mt-6 p-4 bg-green-50 rounded-xl border border-green-200">
-          <p className="text-sm text-green-900 font-medium">
+        <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
+          <p className="text-sm text-blue-900 font-medium">
             Resultados para: <span className="font-bold">"{search}"</span>
             {products.length === 0 ? (
               <span className="ml-2">— Nenhum produto encontrado</span>

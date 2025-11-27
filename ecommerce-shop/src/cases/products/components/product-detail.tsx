@@ -42,10 +42,10 @@ export function ProductDetail({
     }
 
     return (
-        <div className="flex gap-16 py-8">
+        <div className="flex gap-20 py-8 items-start justify-center">
 
             <div className="flex-shrink-0">
-                <div className="w-[500px] h-[600px] flex items-center justify-center rounded-2xl shadow-md overflow-hidden bg-white border border-gray-100" style={{ boxShadow: "0 8px 20px rgba(0,0,0,0.06)" }}>
+                <div className="w-[720px] h-[800px] flex items-center justify-center rounded-2xl shadow-md overflow-hidden bg-white border border-gray-100" style={{ boxShadow: "0 8px 20px rgba(0,0,0,0.06)" }}>
                     <img src={mainImagePhoto}
                         className="max-h-full max-w-full object-contain p-2.5" />
                 </div>
@@ -73,36 +73,33 @@ export function ProductDetail({
             </div>
 
             <div className="flex flex-col gap-4 flex-1">
-                    <div className="flex mt-8 gap-16">
-                        <div className="min-w-md"></div>
-                        <div className="w-fit">
-                            <h1 className="text-3xl font-bold mb-3 text-gray-900">{product.name}</h1>
-                            <div className="mb-4">
-                                {product.brand && (
-                                    <span className="px-3 py-1 rounded-full text-xs text-white bg-green-600 font-semibold">
-                                        {product.brand.name}
-                                    </span>
-                                )}
-                            </div>
-                            <p className="mt-4 text-gray-600 font-medium">{product.description}</p>
-                            <div className="flex flex-col mt-4 gap-2">
-                                <p className="text-gray-500 line-through mb-1 font-medium">
-                                    R$ {(Number(product.price) * 1.15).toFixed(2)}
-                                </p>
-                            </div>
+                    <div className="mt-8">
+                        <h1 className="text-3xl font-bold mb-3 text-gray-900">{product.name}</h1>
+                        <div className="mb-4">
+                            {product.brand && (
+                                <span className="px-3 py-1 rounded-full text-xs text-white bg-blue-600 font-semibold">
+                                    {product.brand.name}
+                                </span>
+                            )}
+                        </div>
+                        <p className="mt-4 text-gray-600 font-medium">{product.description}</p>
+                        <div className="flex flex-col mt-4 gap-2">
+                            <p className="text-gray-500 line-through mb-1 font-medium">
+                                R$ {(Number(product.price) * 1.15).toFixed(2)}
+                            </p>
                         </div>
                     </div>
 
                     <div className="border-t pt-6">
                         <p className="text-sm text-gray-600 mb-3 font-medium">Preço</p>
-                        <p className="text-4xl font-bold text-green-600 mb-2">R$ {Number(product.price).toFixed(2)}</p>
+                        <p className="text-4xl font-bold text-blue-600 mb-2">R$ {Number(product.price).toFixed(2)}</p>
                         <p className="text-sm text-gray-600 font-medium">ou R$ {(Number(product.price) * 0.9).toFixed(2)} no PIX</p>
                     </div>
 
                     <div className="border-t pt-6">
                         <Button 
                             onClick={handleAddProductCart}
-                            className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg">
+                            className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg">
                             Adicionar ao Carrinho
                         </Button>
                     </div>

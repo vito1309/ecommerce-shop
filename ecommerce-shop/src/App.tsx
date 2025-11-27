@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="bg-white min-h-screen">
       <Header />
-      <main className="bg-gray-50">
+      <main className="bg-slate-50">
         <div className="container mx-auto flex flex-col p-4 gap-4">
           <Routes>
             <Route path="/" element={<ProductListPage />} />

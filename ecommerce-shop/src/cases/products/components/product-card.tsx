@@ -42,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
 
                     <div className="flex items-center gap-2">
-                        <p className="font-bold text-green-600 text-lg">
+                        <p className="font-bold text-blue-600 text-lg">
                             <IntlProvider locale="pt-BR">
                                 <FormattedNumber
                                     value={product.price * 0.9}
@@ -51,7 +51,7 @@ export function ProductCard({ product }: ProductCardProps) {
                                 />
                             </IntlProvider>
                         </p>
-                        <span className="bg-green-500 text-white rounded-full px-2.5 py-1 text-xs font-semibold">
+                        <span className="bg-blue-100 text-blue-600 rounded-full px-2.5 py-1 text-xs font-semibold">
                             10% OFF
                         </span>
                     </div>

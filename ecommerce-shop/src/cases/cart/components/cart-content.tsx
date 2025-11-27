@@ -250,7 +250,7 @@ return (
          <CardFooter>
              <Button
              onClick={handleFinalizeOrder}
-             className="w-full bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all duration-200 hover:shadow-lg">
+             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-200 hover:shadow-lg">
                  Finalizar o Pedido
              </Button>
          </CardFooter>

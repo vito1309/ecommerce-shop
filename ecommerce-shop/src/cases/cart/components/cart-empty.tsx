@@ -22,7 +22,7 @@ export function CartEmpty(){
                 <CardFooter className="flex justify-center py-8">
                     <Button
                     variant="outline"
-                    className="border-green-600 text-green-600 hover:border-green-700 hover:text-green-700 hover:bg-green-50 font-bold rounded-lg transition-all"
+                    className="border-blue-600 text-blue-600 hover:border-blue-700 hover:text-blue-700 hover:bg-blue-50 font-bold rounded-lg transition-all"
                     onClick={() => navigate('/')}
                     >
                         Página Inicial

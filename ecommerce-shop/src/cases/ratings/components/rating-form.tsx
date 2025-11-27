@@ -74,7 +74,7 @@ export function RatingForm({ productId, userId, onSuccess }: RatingFormProps) {
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Compartilhe sua opinião sobre este produto..."
                     maxLength={500}
-                    className="w-full p-3 border border-gray-300 rounded-lg text-sm resize-none font-medium focus:border-green-600 focus:ring-green-600"
+                    className="w-full p-3 border border-gray-300 rounded-lg text-sm resize-none font-medium focus:border-blue-600 focus:ring-blue-600"
                     rows={3}
                 />
                 <p className="text-xs text-gray-600 font-medium mt-2">{comment.length}/500</p>
@@ -83,7 +83,7 @@ export function RatingForm({ productId, userId, onSuccess }: RatingFormProps) {
             <Button
                 onClick={handleSubmit}
                 disabled={isPending || rating === 0}
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all duration-200 hover:shadow-lg disabled:opacity-50"
             >
                 {isPending ? "Enviando..." : "Enviar Avaliação"}
             </Button>
