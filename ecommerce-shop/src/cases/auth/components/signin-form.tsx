@@ -51,7 +51,7 @@ export function SignInForm() {
             Faça Login
           </h1>
           <p className="text-center text-sm text-gray-500 mt-1">
-            Já é cliente MaterSHOP?
+            Já é cliente ClickShop?
           </p>
         </CardHeader>
 
@@ -121,7 +121,7 @@ export function SignInForm() {
               Crie uma conta
             </h2>
             <p className="text-sm text-gray-500 mb-4">
-              Ainda não tem uma conta MaterSHOP?
+              Ainda não tem uma conta ClickShop?
             </p>
 
             <Button

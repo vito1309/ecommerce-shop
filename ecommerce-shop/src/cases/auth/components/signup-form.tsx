@@ -50,7 +50,7 @@ export function SignUpForm() {
             Crie uma conta
           </h1>
           <p className="text-center text-sm text-gray-500 mt-1">
-            Ainda não tem uma conta MaterSHOP?
+            Ainda não tem uma conta ClickShop?
           </p>
         </CardHeader>
 
@@ -126,7 +126,7 @@ export function SignUpForm() {
               Faça Login
             </h2>
             <p className="text-sm text-gray-500 mb-4">
-              Já é cliente MaterSHOP?
+              Já é cliente ClickShop?
             </p>
 
             <Button

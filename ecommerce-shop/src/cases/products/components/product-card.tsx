@@ -51,7 +51,7 @@ export function ProductCard({ product }: ProductCardProps) {
                                 />
                             </IntlProvider>
                         </p>
-                        <span className="bg-blue-100 text-blue-600 rounded-full px-2.5 py-1 text-xs font-semibold">
+                        <span className="bg-green-100 text-green-600 rounded-full px-2.5 py-1 text-xs font-semibold">
                             10% OFF
                         </span>
                     </div>

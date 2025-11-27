@@ -3,7 +3,7 @@ import { useAuth } from "@/cases/auth/hooks/use-auth";
 import { ShoppingCart, User, Heart, Zap } from "lucide-react";
 import { Button } from "../button";
 import { Badge } from "../badge";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -18,6 +18,11 @@ export function Header() {
 
     const { cart } = UseCart();
     const { user, signOut } = useAuth();
+    const location = useLocation();
+
+    // Rotas onde a barra de pesquisa deve estar oculta
+    const hideSearchBarRoutes = ['/signin', '/signup', '/orders'];
+    const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
 
     return (
         <header className="w-full border-b border-gray-200 bg-white shadow-sm" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
@@ -29,7 +34,7 @@ export function Header() {
                     </h1>
                 </Link>
 
-                <SearchBar />
+                {!shouldHideSearchBar && <SearchBar />}
 
                 <div className="flex items-center gap-3">
                     {!user && (
