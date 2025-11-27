@@ -5,12 +5,12 @@ const _ENDPOINT = '/auth';
 
 export const AuthService = {
 
-    async SignUP(data: RegisterDTO): Promise<UserResponse[]> {
+    async useSignUp(data: RegisterDTO): Promise<UserResponse[]> {
         const result = await api.post(`${_ENDPOINT}/signup`, data);
         return result.data;
     },
 
-    async SignIn(data: CredentialDTO): Promise<AuthResponse> {
+    async useSignIn(data: CredentialDTO): Promise<AuthResponse> {
         const result = await api.post(`${_ENDPOINT}/signin`, data);
         return result.data;
     },
