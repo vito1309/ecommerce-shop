@@ -1,6 +1,6 @@
 import { UseCart } from "@/cases/cart/hooks/use-cart"
 import { useAuth } from "@/cases/auth/hooks/use-auth";
-import { ShoppingCart, User } from "lucide-react";
+import { ShoppingCart, User, Heart } from "lucide-react";
 import { Button } from "../button";
 import { Badge } from "../badge";
 import { Link } from "react-router-dom";
@@ -41,6 +41,15 @@ export function Header() {
                             </Button>
                         </Link>
                     )}
+
+                    <Link to="/favorites">
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            className="hover:text-red-600">
+                            <Heart />
+                        </Button>
+                    </Link>
 
                     <Link to="/cart" className="relative">
                         <Button

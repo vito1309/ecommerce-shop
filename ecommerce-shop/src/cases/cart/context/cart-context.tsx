@@ -15,6 +15,7 @@ type CartContextType = {
     cart: Cart;
     addProduct: (product: ProductDTO, quatity?: number) => void;
     removeProductCart: (productId: string) => void;
+    updateQuantity: (productId: string, quantity: number) => void;
     clearCart: () => void;
 }
 
@@ -81,12 +82,22 @@ export function CartContextProvider({
         ))
     }
 
+    function updateQuantity(productId: string, quantity: number) {
+        setCart((prevCart) => ({
+            items: prevCart.items.map((item) =>
+                item.product.id === productId
+                    ? { ...item, quantify: Math.max(0, quantity) }
+                    : item
+            ).filter((item) => item.quantify > 0)
+        }))
+    }
+
     function clearCart() {
         setCart({ items: [] });
     }
 
     return (
-        <CartContext.Provider value ={{cart, addProduct, removeProductCart, clearCart}}>
+        <CartContext.Provider value ={{cart, addProduct, removeProductCart, updateQuantity, clearCart}}>
             {children}
         </CartContext.Provider>
     )

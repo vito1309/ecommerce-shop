@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Button } from "./button"
 import { MinusIcon, PlusIcon } from "lucide-react"
 
@@ -19,9 +19,13 @@ export function QuantityInput({
     className= "",
 }: QuantityInputProps) {
     const [quantity, setQuantity] = useState(initialQuantity)
+    const previousQuantityRef = useRef(initialQuantity)
 
     useEffect(() => {
-        onChange?.(quantity)
+        if (quantity !== previousQuantityRef.current) {
+            previousQuantityRef.current = quantity
+            onChange?.(quantity)
+        }
     }, [quantity, onChange])
 
     const handleIncrease = () => {

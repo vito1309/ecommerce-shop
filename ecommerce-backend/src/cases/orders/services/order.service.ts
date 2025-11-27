@@ -54,9 +54,10 @@ export class OrderService {
     };
 
     const merged = this.repository.merge(existing, updateData);
-    const saved = await this.repository.save(merged);
+    await this.repository.save(merged);
     
-    return saved;
+    // Retorna com as relações carregadas
+    return this.findById(id) as Promise<Order>;
   }
 
   async remove(id: string): Promise<void> {

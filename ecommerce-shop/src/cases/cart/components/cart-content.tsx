@@ -13,13 +13,17 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 
 export function Cartcontent(){
-    const { cart, removeProductCart, clearCart } = UseCart();
+    const { cart, removeProductCart, updateQuantity, clearCart } = UseCart();
     const { user } = useAuth();
     const { mutate: createOrder } = useCreateOrder();
     const navigate = useNavigate();
     const bucketBaseURL = import.meta.env.VITE_BUCKET_URL;
     
     const [shipping, setShipping] = useState(0);
+
+    const handleQuantityChange = useCallback((productId: string, quantity: number) => {
+        updateQuantity(productId, quantity);
+    }, [updateQuantity]);
 
     const subtotal = cart.items.reduce((sum, item) => sum + (item.product.price * item.quantify), 0);
     const total = subtotal + shipping;
@@ -93,7 +97,10 @@ return (
                                     <ItemTitle>
                                         <div className="flex flex-wor gap-4">
                                             <div>
-                                                <QuantityInput initialQuantity={item.quantify} />
+                                                <QuantityInput 
+                                                    initialQuantity={item.quantify}
+                                                    onChange={(quantity) => handleQuantityChange(item.product.id!, quantity)}
+                                                />
                                             </div>
                                             <div className="flex flex-col">
                                         <p className="font-semibold flex justify-en gap-1.5">
