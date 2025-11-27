@@ -20,23 +20,23 @@ export function Header() {
     const { user, signOut } = useAuth();
 
     return (
-        <header className="w-full border-b bg-white">
+        <header className="w-full border-b border-gray-200 bg-white shadow-sm" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <div className="container mx-auto flex items-center justify-between py-4 px-4 gap-4">
-                <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition">
-                    <ShoppingCart className="text-green-600" />
-                    <h1 className="text-lg font-bold">
-                        <span className="font-light">Mater</span>Shop
+                <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <ShoppingCart className="text-green-600 w-6 h-6" />
+                    <h1 className="text-xl font-bold text-gray-900">
+                        <span className="font-light">Mater</span><span className="font-bold">Shop</span>
                     </h1>
                 </Link>
 
                 <SearchBar />
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                     {!user && (
                         <Link to="/signin">
                             <Button
                                 variant="outline"
-                                className="border-green-600 text-green-600 hover:bg-green-50">
+                                className="border-green-600 text-green-600 hover:bg-green-50 font-medium">
                                 Entrar
                             </Button>
                         </Link>
@@ -46,8 +46,8 @@ export function Header() {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="hover:text-red-600">
-                            <Heart />
+                            className="hover:text-red-600 font-medium transition-colors">
+                            <Heart className="w-5 h-5" />
                         </Button>
                     </Link>
 
@@ -55,13 +55,13 @@ export function Header() {
                         <Button
                             variant="ghost"
                             size="icon"
-                            className="hover:text-green-700 relative">
-                            <ShoppingCart />
+                            className="hover:text-green-700 relative transition-colors">
+                            <ShoppingCart className="w-5 h-5" />
                             {cart.items.length > 0 && (
                                 <Badge
                                     className={
                                         cn('absolute -top-1 -right-1 h-5 min-w-5 rounded-full px-1',
-                                            'font-mono tabular-nums bg-green-600 text-white'
+                                            'font-mono tabular-nums bg-green-600 text-white font-bold text-xs'
                                         )
                                     }
                                 >
@@ -76,25 +76,26 @@ export function Header() {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="hover:text-green-700">
-                                <User />
+                                className="hover:text-green-700 transition-colors">
+                                <User className="w-5 h-5" />
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             {user && (
                                 <>
-                                    <div className="px-2 py-1.5 text-sm font-semibold">
+                                    <div className="px-2 py-1.5 text-sm font-bold text-gray-900">
                                         {user.name || user.email}
                                     </div>
                                     <DropdownMenuSeparator />
                                 </>
                             )}
                             <DropdownMenuItem asChild>
-                                <Link to="/orders">Meus Pedidos</Link>
+                                <Link to="/orders" className="font-medium">Meus Pedidos</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem
                                 onClick={() => signOut()}
                                 variant="destructive"
+                                className="font-medium"
                             >
                                 Logout
                             </DropdownMenuItem>

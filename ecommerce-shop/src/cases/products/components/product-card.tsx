@@ -18,19 +18,19 @@ export function ProductCard({ product }: ProductCardProps) {
             : placeholderSVG;
 
     return (
-        <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white">
-            <div className="h-[200px] w-full bg-gray-50 flex items-center justify-center overflow-hidden relative">
-                <img className="max-h-full max-w-full object-contain" src={imagePath} />
-                <div className="absolute top-2 right-2">
+        <div className="bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1.5 border border-transparent shadow-sm shadow-black/6" style={{ boxShadow: "0 8px 20px rgba(0,0,0,0.06)" }}>
+            <div className="h-[200px] w-full bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                <img className="max-h-full max-w-full object-contain p-2.5" src={imagePath} />
+                <div className="absolute top-3 right-3">
                     <FavoriteButton product={product} />
                 </div>
             </div>
-            <div className="p-3 space-y-2">
+            <div className="p-4 space-y-3">
                 <h4 className="font-semibold text-sm line-clamp-2 text-gray-900">{product.name}</h4>
 
-                <div className="space-y-1">
+                <div className="space-y-2">
 
-                    <p className="text-gray-500 line-through text-xs">
+                    <p className="text-gray-500 line-through text-xs font-medium">
                         <IntlProvider locale="pt-BR">
                             <FormattedNumber 
                                 value={product.price * 1.15}
@@ -41,8 +41,8 @@ export function ProductCard({ product }: ProductCardProps) {
                     </p>
 
 
-                    <div className="flex items-center gap-1">
-                        <p className="font-bold text-green-600 text-base">
+                    <div className="flex items-center gap-2">
+                        <p className="font-bold text-green-600 text-lg">
                             <IntlProvider locale="pt-BR">
                                 <FormattedNumber
                                     value={product.price * 0.9}
@@ -51,13 +51,13 @@ export function ProductCard({ product }: ProductCardProps) {
                                 />
                             </IntlProvider>
                         </p>
-                        <span className="bg-green-100 text-green-700 rounded px-1 py-0.5 text-xs font-medium">
+                        <span className="bg-green-500 text-white rounded-full px-2.5 py-1 text-xs font-semibold">
                             10% OFF
                         </span>
                     </div>
 
 
-                    <p className="text-gray-600 text-xs">
+                    <p className="text-gray-600 text-xs font-medium">
                         <IntlProvider locale="pt-BR">
                             <FormattedNumber
                                 value={product.price}

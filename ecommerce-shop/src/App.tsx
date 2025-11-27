@@ -12,9 +12,9 @@ import { PrivateRoute } from "./routes/private.route"
 function App() {
 
   return (
-    <div className="bg-zinc-50 min-h-screen">
+    <div className="bg-white min-h-screen">
       <Header />
-      <main className="bg-white">
+      <main className="bg-gray-50">
         <div className="container mx-auto flex flex-col p-4 gap-4">
           <Routes>
             <Route path="/" element={<ProductListPage />} />

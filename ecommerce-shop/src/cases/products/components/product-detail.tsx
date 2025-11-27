@@ -45,9 +45,9 @@ export function ProductDetail({
         <div className="flex gap-16 py-8">
 
             <div className="flex-shrink-0">
-                <div className="w-[500px] h-[600px] flex items-center justify-center rounded shadow overflow-hidden bg-gray-50">
+                <div className="w-[500px] h-[600px] flex items-center justify-center rounded-2xl shadow-md overflow-hidden bg-white border border-gray-100" style={{ boxShadow: "0 8px 20px rgba(0,0,0,0.06)" }}>
                     <img src={mainImagePhoto}
-                        className="max-h-full max-w-full object-contain" />
+                        className="max-h-full max-w-full object-contain p-2.5" />
                 </div>
 
                 {photos && photos.length > 1 && (
@@ -57,13 +57,13 @@ export function ProductDetail({
                                 <Button
                                     variant="ghost"
                                     onClick={() => setSelectedPhoto(index)}
-                                    className="w-24 h-24 rounded overflow-hidden border-2 hover:border-green-600 hover:cursor-pointer transition-colors"
+                                    className="w-24 h-24 rounded-xl overflow-hidden border-2 hover:border-green-600 hover:cursor-pointer transition-all hover:shadow-md bg-white"
                                     style={{
-                                        borderColor: index === selectedPhoto ? '#16a34a' : '#d1d5db'
+                                        borderColor: index === selectedPhoto ? '#16a34a' : '#e5e7eb'
                                     }}>
                                     <img
-                                        src={bucketBaseURL ? `${bucketBaseURL}${photo.path}` : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="96"%3E%3Crect fill="%23e5e7eb" width="96" height="96"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="11" fill="%23666"%3ESem%3C/text%3E%3C/svg%3E'}
-                                        className="w-full h-full object-contain"
+                                        src={bucketBaseURL ? `${bucketBaseURL}${photo.path}` : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="96"%3E%3Crect fill="%23f3f4f6" width="96" height="96"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="system-ui" font-size="11" fill="%23666"%3ESem%3C/text%3E%3C/svg%3E'}
+                                        className="w-full h-full object-contain p-1"
                                     />
                                 </Button>
                             </li>
@@ -76,17 +76,17 @@ export function ProductDetail({
                     <div className="flex mt-8 gap-16">
                         <div className="min-w-md"></div>
                         <div className="w-fit">
-                            <h1 className="text-3xl font-semibold mb-3">{product.name}</h1>
+                            <h1 className="text-3xl font-bold mb-3 text-gray-900">{product.name}</h1>
                             <div className="mb-4">
                                 {product.brand && (
-                                    <span className="p-1 rounded-sm text-xs text-white bg-green-600">
+                                    <span className="px-3 py-1 rounded-full text-xs text-white bg-green-600 font-semibold">
                                         {product.brand.name}
                                     </span>
                                 )}
                             </div>
-                            <p className="mt-4 text-gray-700">{product.description}</p>
+                            <p className="mt-4 text-gray-600 font-medium">{product.description}</p>
                             <div className="flex flex-col mt-4 gap-2">
-                                <p className="text-gray-700 line-through mb-1">
+                                <p className="text-gray-500 line-through mb-1 font-medium">
                                     R$ {(Number(product.price) * 1.15).toFixed(2)}
                                 </p>
                             </div>
@@ -94,27 +94,27 @@ export function ProductDetail({
                     </div>
 
                     <div className="border-t pt-6">
-                        <p className="text-sm text-gray-500 mb-2">Preço</p>
-                        <p className="text-4xl font-bold text-green-600 mb-1">R$ {Number(product.price).toFixed(2)}</p>
-                        <p className="text-sm text-gray-600">ou R$ {(Number(product.price) * 0.9).toFixed(2)} no PIX</p>
+                        <p className="text-sm text-gray-600 mb-3 font-medium">Preço</p>
+                        <p className="text-4xl font-bold text-green-600 mb-2">R$ {Number(product.price).toFixed(2)}</p>
+                        <p className="text-sm text-gray-600 font-medium">ou R$ {(Number(product.price) * 0.9).toFixed(2)} no PIX</p>
                     </div>
 
                     <div className="border-t pt-6">
                         <Button 
                             onClick={handleAddProductCart}
-                            className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition-colors">
+                            className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg">
                             Adicionar ao Carrinho
                         </Button>
                     </div>
 
                     <div className="border-t pt-6">
-                        <h2 className="text-lg font-semibold mb-4">Avaliações</h2>
+                        <h2 className="text-lg font-bold mb-4 text-gray-900">Avaliações</h2>
                         <RatingDisplay productId={product.id!} />
                     </div>
 
                     {user && hasPurchased && (
                         <div className="border-t pt-6">
-                            <h3 className="text-lg font-semibold mb-4">Sua Avaliação</h3>
+                            <h3 className="text-lg font-bold mb-4 text-gray-900">Sua Avaliação</h3>
                             <RatingForm 
                                 productId={product.id!} 
                                 userId={user.id}

@@ -44,21 +44,21 @@ export function SearchBar() {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyPress={handleKeyPress}
-        className="border-green-200 focus:border-green-600"
+        className="border-gray-300 focus:border-green-600 focus:ring-green-600 rounded-lg font-medium bg-gray-50 hover:bg-white transition-colors"
       />
       {inputValue && (
         <Button
           variant="ghost"
           size="icon"
           onClick={handleClear}
-          className="hover:text-red-600"
+          className="hover:text-red-600 transition-colors"
         >
           <X className="w-4 h-4" />
         </Button>
       )}
       <Button
         onClick={handleSearch}
-        className="bg-green-600 hover:bg-green-700 text-white"
+        className="bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold transition-all duration-200 hover:shadow-md"
         size="icon"
       >
         <Search className="w-4 h-4" />

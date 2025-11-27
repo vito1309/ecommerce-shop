@@ -15,9 +15,9 @@ export function ProductListPage() {
       <CategoryMenu />
 
       {search && (
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <p className="text-sm text-blue-900">
-            Resultados para: <span className="font-semibold">"{search}"</span>
+        <div className="mt-6 p-4 bg-green-50 rounded-xl border border-green-200">
+          <p className="text-sm text-green-900 font-medium">
+            Resultados para: <span className="font-bold">"{search}"</span>
             {products.length === 0 ? (
               <span className="ml-2">— Nenhum produto encontrado</span>
             ) : (
@@ -37,11 +37,12 @@ export function ProductListPage() {
             <p className="text-gray-500">Nenhum produto encontrado.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-8">
             {products.map((product) => (
               <Link 
                 key={product.id}
                 to={`/product/${product.id}`}
+                className="group"
               >
                 <ProductCard product={product} />
               </Link>

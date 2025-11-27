@@ -10,8 +10,8 @@ export function RatingDisplay({ productId }: RatingDisplayProps) {
 
     if (ratings.length === 0) {
         return (
-            <div className="text-center py-6 text-gray-500">
-                <p>Este produto ainda não tem avaliações</p>
+            <div className="text-center py-8 text-gray-600 bg-gray-50 rounded-xl p-6">
+                <p className="font-medium">Este produto ainda não tem avaliações</p>
             </div>
         );
     }
@@ -19,14 +19,14 @@ export function RatingDisplay({ productId }: RatingDisplayProps) {
     const averageRating = ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length;
 
     return (
-        <div className="space-y-4">
-            <div className="flex items-center gap-4">
-                <div>
-                    <div className="flex gap-1">
+        <div className="space-y-6">
+            <div className="flex items-center gap-6 bg-gray-50 p-6 rounded-xl">
+                <div className="flex-1">
+                    <div className="flex gap-1 mb-3">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <Star
                                 key={star}
-                                size={20}
+                                size={24}
                                 className={`${
                                     star <= averageRating
                                         ? "fill-yellow-400 text-yellow-400"
@@ -35,16 +35,19 @@ export function RatingDisplay({ productId }: RatingDisplayProps) {
                             />
                         ))}
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">
-                        {averageRating.toFixed(1)} de 5 ({ratings.length} avaliações)
+                    <p className="text-lg font-bold text-gray-900">
+                        {averageRating.toFixed(1)} de 5
+                    </p>
+                    <p className="text-sm text-gray-600 font-medium mt-1">
+                        {ratings.length} {ratings.length === 1 ? 'avaliação' : 'avaliações'}
                     </p>
                 </div>
             </div>
 
-            <div className="space-y-3 max-h-64 overflow-y-auto">
+            <div className="space-y-3 max-h-96 overflow-y-auto">
                 {ratings.map((rating) => (
-                    <div key={rating.id} className="border-t pt-3">
-                        <div className="flex items-center gap-2 mb-1">
+                    <div key={rating.id} className="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                        <div className="flex items-center gap-3 mb-2">
                             <div className="flex gap-0.5">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <Star
@@ -58,12 +61,12 @@ export function RatingDisplay({ productId }: RatingDisplayProps) {
                                     />
                                 ))}
                             </div>
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-gray-600 font-medium">
                                 {new Date(rating.createdAt!).toLocaleDateString('pt-BR')}
                             </span>
                         </div>
                         {rating.comment && (
-                            <p className="text-sm text-gray-700">{rating.comment}</p>
+                            <p className="text-sm text-gray-700 font-medium">{rating.comment}</p>
                         )}
                     </div>
                 ))}

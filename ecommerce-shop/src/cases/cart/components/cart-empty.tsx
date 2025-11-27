@@ -6,23 +6,23 @@ import { useNavigate } from "react-router-dom";
 export function CartEmpty(){
     const navigate = useNavigate();
     return(
-        <div className="flex justify-center items-center py-8">
-            <Card className="max-w-3xl">
-                <CardContent className="flex flex-col justify-center items-center py-8">
-                    <div className="w-25 h-24 rounded-full border-4 border-green-600 flex justify-center items-center">
+        <div className="flex justify-center items-center py-16">
+            <Card className="max-w-3xl border-gray-200 shadow-sm rounded-2xl">
+                <CardContent className="flex flex-col justify-center items-center py-12">
+                    <div className="w-24 h-24 rounded-full border-4 border-green-600 flex justify-center items-center bg-green-50">
                         <ShoppingCart className="w-12 h-12 text-green-600" />
                     </div>
-                    <h3 className="text-center text-2xl font-semibold my4">
+                    <h3 className="text-center text-2xl font-bold text-gray-900 mt-4">
                         Seu carrinho está vazio!
                     </h3>
-                    <p className="text-center text-lg text-gray-500">
+                    <p className="text-center text-lg text-gray-600 font-medium mt-2">
                         Clique no botão abaixo para voltar a página inicial.
                     </p>
                 </CardContent>
                 <CardFooter className="flex justify-center py-8">
                     <Button
                     variant="outline"
-                    className="border-green-600 text-green-600 hover:border-green-700 hover:text-green-700"
+                    className="border-green-600 text-green-600 hover:border-green-700 hover:text-green-700 hover:bg-green-50 font-bold rounded-lg transition-all"
                     onClick={() => navigate('/')}
                     >
                         Página Inicial

@@ -20,7 +20,7 @@ export function CartPage(){
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="py-8">
+            <div className="py-12">
                 {cart.items.length > 0 ? (
                     <Cartcontent />
                 ) : (

@@ -27,7 +27,7 @@ export function FavoriteButton({ product }: FavoriteButtonProps) {
             variant="ghost"
             size="icon"
             onClick={handleToggleFavorite}
-            className={favorited ? "text-red-500" : "text-gray-400"}
+            className={`rounded-full w-10 h-10 bg-white shadow-md transition-all duration-200 flex items-center justify-center ${favorited ? "text-red-500 hover:bg-red-50" : "text-gray-400 hover:bg-gray-50"}`}
         >
             <Heart className={`w-5 h-5 ${favorited ? "fill-red-500" : ""}`} />
         </Button>

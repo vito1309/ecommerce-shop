@@ -30,9 +30,9 @@ export function ProductdetailPage(){
                 </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="py-8">
+            <div className="py-12">
                 {isLoading ? (
-                    <h1>Carregando</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">Carregando...</h1>
                 ) : (
                 <ProductDetail product={product!} />
                 )}
