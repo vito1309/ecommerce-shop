@@ -22,7 +22,6 @@ export function ProductDetail({
     const bucketBaseURL = import.meta.env.VITE_BUCKET_URL || '';
     const [selectedPhoto, setSelectedPhoto] = useState<number>(0);
 
-    // Verificar se o usuário já comprou este produto
     const hasPurchased = userOrders.some(order =>
         order.items?.some(item => item.product?.id === product.id)
     );
@@ -35,9 +34,7 @@ export function ProductDetail({
         ? `${bucketBaseURL}${mainPhoto.path}`
         : placeholderSVG;
 
-
-
-        function handleAddProductCart(){
+    function handleAddProductCart(){
         addProduct(product)
     }
 

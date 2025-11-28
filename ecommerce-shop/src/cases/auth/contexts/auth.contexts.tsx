@@ -23,7 +23,6 @@ type AuthContextProviderProps = {
         
         useEffect(() => {
             const userStoraged = localStorage.getItem('user');
-            //const tokenStoraged = localStorage.getItem('token');
 
             if (userStoraged) {
                 setUser(JSON.parse(userStoraged));

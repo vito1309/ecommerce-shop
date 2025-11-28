@@ -9,7 +9,6 @@ export function useProducts(categoryId?: string, search?: string) {
     queryFn: async () => {
       const products = await ProductService.list(categoryId, search);
       
-      // Filtro local para garantir que a busca funcione
       if (search && search.trim()) {
         const searchLower = search.toLowerCase().trim();
         return products.filter(product =>
@@ -27,6 +26,6 @@ export function useProduct(id: string) {
   return useQuery<ProductDTO>({
     queryKey: ['product', id],
     queryFn: () => ProductService.getById(id),
-    enabled: !!id, // or Boolean(id)
+    enabled: !!id,
   });
 }

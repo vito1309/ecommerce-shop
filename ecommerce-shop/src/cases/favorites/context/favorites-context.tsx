@@ -20,7 +20,6 @@ export function FavoritesContextProvider({ children }: FavoritesContextProviderP
     const authContext = useContext(AuthContext);
     const user = authContext?.user;
 
-    // Carregar favoritos do localStorage por usuário
     useEffect(() => {
         if (!user?.id) {
             setFavorites([]);
@@ -40,7 +39,6 @@ export function FavoritesContextProvider({ children }: FavoritesContextProviderP
         }
     }, [user?.id]);
 
-    // Salvar favoritos no localStorage por usuário
     useEffect(() => {
         if (!user?.id) return;
         

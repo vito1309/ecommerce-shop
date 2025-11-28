@@ -39,7 +39,6 @@ export function Cartcontent(){
             return;
         }
 
-        // Calcular total com precisão
         const orderSubtotal = cart.items.reduce((sum, item) => sum + (item.product.price * item.quantify), 0);
         const orderTotal = orderSubtotal + shipping;
 

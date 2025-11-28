@@ -20,7 +20,6 @@ export function Header() {
     const { user, signOut } = useAuth();
     const location = useLocation();
 
-    // Rotas onde a barra de pesquisa deve estar oculta
     const hideSearchBarRoutes = ['/signin', '/signup', '/orders'];
     const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
 
