@@ -12,13 +12,13 @@ const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <CartContextProvider>
-        <FavoritesContextProvider>
-          <AuthContextProvider>
+      <AuthContextProvider>
+        <CartContextProvider>
+          <FavoritesContextProvider>
             <App />
-          </AuthContextProvider>
-        </FavoritesContextProvider>
-      </CartContextProvider>
+          </FavoritesContextProvider>
+        </CartContextProvider>
+      </AuthContextProvider>
     </QueryClientProvider>
   </BrowserRouter>,
 )

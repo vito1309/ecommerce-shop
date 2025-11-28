@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, useContext, type ReactNode } from "react";
 import type { ProductDTO } from "@/cases/products/dtos/product.dto";
+import { AuthContext } from "@/cases/auth/contexts/auth.contexts";
 
 type FavoritesContextType = {
     favorites: ProductDTO[];
@@ -16,23 +17,36 @@ type FavoritesContextProviderProps = {
 
 export function FavoritesContextProvider({ children }: FavoritesContextProviderProps) {
     const [favorites, setFavorites] = useState<ProductDTO[]>([]);
+    const authContext = useContext(AuthContext);
+    const user = authContext?.user;
 
-    // Carregar favoritos do localStorage
+    // Carregar favoritos do localStorage por usuário
     useEffect(() => {
-        const storageFavorites = localStorage.getItem('favorites');
+        if (!user?.id) {
+            setFavorites([]);
+            return;
+        }
+
+        const userFavoritesKey = `favorites_${user.id}`;
+        const storageFavorites = localStorage.getItem(userFavoritesKey);
         if (storageFavorites) {
             try {
                 setFavorites(JSON.parse(storageFavorites));
             } catch {
                 setFavorites([]);
             }
+        } else {
+            setFavorites([]);
         }
-    }, []);
+    }, [user?.id]);
 
-    // Salvar favoritos no localStorage
+    // Salvar favoritos no localStorage por usuário
     useEffect(() => {
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-    }, [favorites]);
+        if (!user?.id) return;
+        
+        const userFavoritesKey = `favorites_${user.id}`;
+        localStorage.setItem(userFavoritesKey, JSON.stringify(favorites));
+    }, [favorites, user?.id]);
 
     function addToFavorites(product: ProductDTO) {
         setFavorites((prev) => {
